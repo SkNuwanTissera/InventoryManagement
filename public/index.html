@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TaxiApp</title>
+    <!-- Angular js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js" integrity="sha256-lw0u1cTM3AYG0sY5cKefhETFxDjo/T5GTAppqOwgGPY=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+
+
+    <script src="app.module.js"></script>
+    <script src="controllers/user.controller.js"></script>
+    <script src="services/user.service.js"></script>
+
+    <script src="js/angular-chosen.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body ng-app="TaxiApp" ng-controller="UserController">
+<h1>Inventory Management System</h1>
+<div class="row" >
+    <table class="table">
+        <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Mobile</th>
+            <th>User Type</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users | filter:query | orderBy : sort ">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}} </td>
+            <td>{{user.mobile}}</td>
+            <td>{{user.userType}} </td>
+            <td>{{user.email}}</td>
+            <!--<td><input ng-model="user.lastNames" placeholder="lastname"/></td>-->
+            <td><button class="btn btn-success"  data-toggle="collapse" data-target="#userEditForm"
+                        aria-controls="userEditForm" ng-click="setObject(user)">Edit</button></td>
+            <td><button class="btn btn-warning" ng-click="deleteUser(user._id)">Terminate</button></td>
+            <td><button class="btn btn-primary" ng-click="setCurrentUser(user);" onclick="location.href='/app/prescriptions'">Add Prescription</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

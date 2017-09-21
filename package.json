@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Takzy Backend node version",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achalakavinda/Takzy-Backend.git"
+  },
+  "author": "AITSolutions",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/achalakavinda/Takzy-Backend/issues"
+  },
+  "homepage": "https://github.com/achalakavinda/Takzy-Backend#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mysql": "^2.14.1",
+    "nodemon": "^1.11.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
+}
