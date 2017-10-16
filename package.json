@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Takzy Backend node version",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/achalakavinda/Takzy-Backend.git"
+    "url": ""
   },
-  "author": "AITSolutions",
+  "author": "SkHexSpeak",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/achalakavinda/Takzy-Backend/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/achalakavinda/Takzy-Backend#readme",
+  "homepage": "",
   "devDependencies": {
     "nodemon": "^1.11.0"
   },

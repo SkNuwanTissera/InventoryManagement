@@ -34,24 +34,9 @@ const UserRouter = require('./routes/user.route');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); // to get information from html forms
 
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: true,
-//     saveUninitialized: true
-// }));
-// app.set(cookieParser());
-//
-// // Passport init
-// app.use(passport.initialize());
-// app.use(passport.session());
-//
-//
-app.use('/app', express.static(__dirname + '/public'));
-// app.use('/models', express.static(__dirname + '/models'));
-// app.use('/routes', express.static(__dirname + '/routes'));
-// app.use('/test', express.static(__dirname + '/test'));
- ;
 
+
+app.use('/app', express.static(__dirname + '/public'));
 
 
 app.use('/api/users', UserRouter);
