@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('TaxiApp').factory('UserService', ['$http',
+angular.module('inventoryApp').factory('UserService', ['$http',
     function ($http) {
         return {
             get: () => $http.get('/users').then(response => response.data),

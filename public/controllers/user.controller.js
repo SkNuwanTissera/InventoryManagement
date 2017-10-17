@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('TaxiApp').controller('UserController',['$scope','UserService',
+angular.module('inventoryApp').controller('UserController',['$scope','UserService',
     function ($scope,UserService) {
     /*
      * GETTERS
