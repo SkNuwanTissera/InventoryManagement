@@ -19,6 +19,7 @@ require('./oauth/passport.js')(passport);
 
 //load routes
 const UserRouter = require('./routes/user.route.js');
+const MainRouter = require('./routes/main.route.js');
 
 
 // Init App
