@@ -12,6 +12,7 @@ mongoose.Promise = global.Promise;
 
 //load models
 require('./models/user.model.js');
+require('./models/invoice.model.js');
 
 
 //load passportJS configuration
@@ -20,6 +21,7 @@ require('./oauth/passport.js')(passport);
 //load routes
 const UserRouter = require('./routes/user.route.js');
 const MainRouter = require('./routes/main.route.js');
+const InvoiceRouter = require('./routes/invoice.route.js');
 
 
 // Init App
@@ -71,6 +73,7 @@ app.use('/app/modules', express.static(__dirname + '/bower_components'));
 
 app.use('/app', MainRouter);
 app.use('/users', UserRouter);
+app.use('/invoices', InvoiceRouter);
 
 
 

@@ -24,10 +24,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
     <script src="app.module.js"></script>
-    <script src="controllers/prescription.controller.js"></script>
-    <script src="controllers/user.controller.js"></script>
-    <script src="services/prescription.service.js"></script>
-    <script src="services/user.service.js"></script>
+    <script src="controllers/invoice.controller.js"></script>
+    <script src="services/invoice.service.js"></script>
+   
 
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +44,7 @@
 
 </head>
 
-<body  ng-app="PharmacyApp"  onload="SetDate()";>
+<body  ng-app="InventoryApp"  onload="SetDate()";>
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
@@ -76,51 +75,17 @@
                     
 
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Menu</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="active"><a href="#">Cheif Pharmacist</a></li>
-                            <li class="active"><a href="#">Assistant Pharmacist</a></li>
+                            <li class="active"><a href="#">Invoice Management</a></li>
+                            <li class="active"><a href="#">User Management</a></li>
+                            <li class="active"><a href="#">Supplier Management</a></li>
+                            <li class="active"><a href="#">Stock Management</a></li>
+                            <li class="active"><a href="#">Item Management</a></li>
                         </ul>
                     </li>
                     
 
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="#">Flot Charts</a></li>
-                            <li><a href="#">Morris.js Charts</a></li>
-                        </ul>
-                    </li>  
-                  
-                    
-                   
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Menu Levels </span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li>
-                                <a href="#">Third Level <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-
-                                </ul>
-                            </li>
-                            <li><a href="#">Second Level Item</a></li>
-                            <li>
-                                <a href="#">Second Level Item</a></li>
-                            <li>
-                                <a href="#">Second Level Item</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
         </nav>
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
@@ -137,7 +102,7 @@
             <ul class="nav navbar-top-links navbar-right">
                 
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to Pharmacy HexSpeak</span>
+                    <span class="m-r-sm text-muted welcome-message">Welcome to INVENTORY HexSpeak</span>
                 </li>
                 
                 
@@ -198,7 +163,7 @@
         </div>
             
             
-            <div class="row"  ng-controller="UserController">
+            <div class="row"  ng-controller="InvoiceController">
                 <div class="col-lg-12">
                     <div  class="wrapper wrapper-content">
 
@@ -269,7 +234,7 @@
                                                    <div class="row">
                                                        <div class="col-md-6">
                                                            <div class="form-group"><label class="col-sm-4 control-label">VAT No.</label>
-                                                               <div class="col-sm-6"><input type="text" ng-model = "invoice.vatno" class="form-control"></div>
+                                                               <div class="col-sm-6"><input type="text" ng-model = "invoice.vatNo" class="form-control"></div>
                                                            </div>
                                                        </div>
                                                        <div class="col-md-6">
@@ -281,8 +246,8 @@
                                                    </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <div class="form-group"><label class="col-sm-4 control-label">Username</label>
-                                                            <div class="col-sm-6"><input type="text" ng-model = "invoice.cusname" class="form-control" name="username"></div>
+                                                            <div class="form-group"><label class="col-sm-4 control-label">Customer</label>
+                                                            <div class="col-sm-6"><input type="text" ng-model = "invoice.cusName" class="form-control" name="username"></div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -398,7 +363,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-4 col-sm-offset-2">
                                                             <button class="btn btn-danger" type="submit">Cancel</button>
-                                                            <button class="btn btn-success"  ng-click="addUser(user)">Save changes</button>
+                                                            <button class="btn btn-success"  ng-click="addInvoice(invoice)">Save changes</button>
                                                         </div>
                                                     </div>
                                                 <br/><br/>
@@ -413,11 +378,10 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th>First name</th>
-                                            <th>Last name</th>
-                                            <th>Mobile</th>
-                                            <th>User Type</th>
-                                            <th>Email</th>
+                                            <th>Invoice#</th>
+                                            <th>VAT#</th>
+                                            <th>Date</th>
+                                    
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -425,16 +389,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr ng-repeat="user in users | filter:query">
-                                            <td>{{user.firstName}}</td>
-                                            <td>{{user.lastName}} </td>
-                                            <td>{{user.mobile}}</td>
-                                            <td>{{user.userType}} </td>
-                                            <td>{{user.email}}</td>
+                                        <tr ng-repeat="invoice in invoices | filter:query">
+                                            <td>{{invoice.id}}</td>
+                                            <td>{{invoice.vatNo}} </td>
+                                            <td>{{invoice.date}}</td>
+                                            
                                             <!--<td><input ng-model="user.lastNames" placeholder="lastname"/></td>-->
-                                            <td><button class="btn btn-success" ng-click="editUser(user,user._id)">Edit</button></td>
-                                            <td><button class="btn btn-danger" ng-click="deleteUser(user._id)">Delete</button></td>
-                                            <td><button class="btn btn-primary" ng-click="setCurrentUser(user)" onclick="location.href='/app/prescriptions'">Add Prescription</button></td>
+                                            <td><button class="btn btn-success" ng-click="editInvoice(invoice,inovice._id)">Edit</button></td>
+                                            <td><button class="btn btn-danger" ng-click="deleteInvoice(invoice._id)">Delete</button></td>
+                                
                                         </tr>
                                         </tbody>
                                     </table>
