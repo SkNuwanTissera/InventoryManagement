@@ -1,43 +1,20 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <base href="/">
-
-    <title>Starter Node and Angular</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
-
-    <!-- JS -->
-    <script src="libs/angular/angular.min.js"></script>
-    <script src="libs/angular-route/angular-route.min.js"></script>
-
-    <!-- ANGULAR CUSTOM -->
-    <script src="app.module.js"></script>
-    <script src="controllers/user.controller.js"></script>
-    <script src="services/user.service.js"></script>
-
+    <link rel="stylesheet" href="style.css">
 
 </head>
-<body ng-app="inventoryApp" ng-controller="UserController">
-<div class="container">
 
-    <!-- HEADER -->
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Stencil: Node and Angular</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="/nerds">Nerds</a></li>
-            <li><a href="/geeks">Geeks</a></li>
-        </ul>
-    </nav>
-
-    <!-- ANGULAR DYNAMIC CONTENT -->
-    <div ng-view></div>
+<body>
+<div ng-view ng-app="PharmacyApp">
 
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+<script src="http://code.angularjs.org/1.2.1/angular-route.min.js"></script>
+<script src="route.config.js"></script>
 </body>
+
 </html>

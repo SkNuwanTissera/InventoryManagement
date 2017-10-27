@@ -1,21 +1,74 @@
-var db=require('../database');
+'use strict';
 
-var User={
+const mongoose = require('mongoose');
+const bcrypt   = require('bcrypt-nodejs');
 
-    getAllUsers:function(callback){
-        return db.query("Select * from user",callback);
+const Schema = mongoose.Schema;
+
+const UserSchema = new Schema({
+    firstName: {
+        type: String,
+        required: true
     },
-    getUserById:function(id,callback){
-        return db.query("select * from user where id=?",[id],callback);
+    lastName: {
+        type: String,
+        required: true
     },
-    addUser:function(User,callback){
-        return db.query("Insert into user(name,type,email,password) values(?,?,?,?)",[User.name,User.type,User.email,User.password],callback);
+    userName: {
+        type: String,
+        required: true
     },
-    deleteUser:function(id,callback){
-        return db.query("delete from user where id=?",[id],callback);
+    password: {
+        type: String,
+        required: true
     },
-    updateUser:function(id,User,callback){
-        return db.query("update user set name=? type=? email=? password=?  where id=?",[User.name,User.type,User.email,User.password,id],callback);
+    mobile: {
+        type: String,
+    },
+    age:{
+        type:String
+    },
+    height:{
+        type:String
+    },
+    weight:{
+        type:String
+    },
+    email: {
+        type: String,
+
+    },
+    userType: {
+        type: String,
+
+    },
+    hospital: {
+        type: String
+    },
+    bloodGroup:{
+        type: String
     }
-}
-module.exports=User;
+    //     type: Date,
+    //     required: true
+    // },
+    //
+    // ranking: {
+    //     type: Number,
+    //     unique: true,
+    //     required: true
+    // },
+
+});
+
+// generating a hash
+UserSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+// checking if password is valid
+UserSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;

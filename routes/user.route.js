@@ -1,81 +1,81 @@
-var express = require('express');
-var router = express.Router();
-var UserModel = require('../models/user.model.js');
+'use strict';
 
-router.get('/:id?',function(req,res,next){
+const express = require('express'),
+    mongoose = require('mongoose');
 
-    if(req.params.id){
+mongoose.set('debug', false);
 
-        UserModel.getUserById(req.params.id,function(err,rows){
+const UserModel = mongoose.model('User');
 
-            if(err)
-            {
-                res.json(err);
-            }
-            else{
-                res.json(rows);
-            }
-        });
-    }
-    else{
 
-        UserModel.getAllUsers(function(err,rows){
+const Router = express.Router();
 
-            if(err)
-            {
-                res.json(err);
-            }
-            else
-            {
-                res.json(rows);
-            }
+Router.get('/', (req, res) => {
 
-        });
-    }
-});
+        UserModel.find().then(users => {
+        res.json(users);
 
-router.post('/',function(req,res,next){
-
-    UserModel.addUser(req.body,function(err,count){
-        if(err)
-        {
-            res.json(err);
-        }
-        else{
-            res.json(req.body);//or return count for 1 &amp;amp;amp; 0
-        }
+    }).catch(err => {
+        console.error(err);
+        res.sendStatus(500);
     });
 });
 
-router.delete('/:id',function(req,res,next){
-
-    UserModel.deleteUser(req.params.id,function(err,count){
-
-        if(err)
-        {
-            res.json(err);
-        }
-        else
-        {
-            res.json(count);
-        }
-
+Router.get('/:id', (req, res) => {
+    UserModel.findById(req.params.id).then(user => {
+        res.json(user || {});
+    }).catch(err => {
+        console.error(err);
+        res.sendStatus(500);
     });
 });
 
-router.put('/:id',function(req,res,next){
-
-    UserModel.updateUser(req.params.id,req.body,function(err,rows){
-
-        if(err)
-        {
-            res.json(err);
-        }
-        else
-        {
-            res.json(rows);
-        }
+Router.post('/', (req, res) => {
+    const user = new UserModel(req.body);
+    user.password = user.generateHash(req.body.password);
+    user.save().then(user => {
+        res.json(user);
+    }).catch(err => {
+        console.error(err);
+        res.sendStatus(500);
     });
 });
 
-module.exports=router;
+Router.put('/:id', (req, res) => {
+    const user = req.body;
+    delete user._id;
+    const userId = req.params.id;
+    UserModel.findByIdAndUpdate(userId, {$set: user}).then(userDb => {
+        res.json(user);
+    }).catch(err => {
+        console.error(err);
+        res.sendStatus(500);
+    });
+});
+
+Router.delete('/:id', (req, res) => {
+    UserModel.findByIdAndRemove(req.params.id).then(() => {
+        res.sendStatus(200);
+    }).catch(err => {
+        console.error(err);
+        res.sendStatus(500);
+    });
+});
+
+Router.post('/:id/comments', (req, res) => {
+    let comment = new CommentModel(req.body);
+    const userId = req.params.id;
+    comment.user = userId;
+    comment.save().then(commentDb => {
+        return UserModel.findByIdAndUpdate(userId, {$push: {"comments": commentDb._id}})
+    }).then(() => {
+        return UserModel.findById(userId).populate('comments').exec();
+    }).then(userDb => {
+        res.json(userDb);
+    }).catch(err => {
+        console.error(err);
+        res.sendStatus(500);
+    });
+});
+
+module.exports = Router;
