@@ -14,44 +14,14 @@ const InvoiceSchema = new Schema({
         type: String,
         required: true
     },
-    userName: {
+    date: {
         type: String,
         required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    mobile: {
-        type: String,
-    },
-    age:{
-        type:String
-    },
-    height:{
-        type:String
-    },
-    weight:{
-        type:String
-    },
-    email: {
-        type: String,
-
-    },
-    userType: {
-        type: String,
-
-    },
-    hospital: {
-        type: String
-    },
-    bloodGroup:{
-        type: String
     }
- ,
+    
 
 });
 
-const Invoice = mongoose.model('User', InvoiceSchema);
+const Invoice = mongoose.model('Invoice', InvoiceSchema);
 
 module.exports = Invoice;

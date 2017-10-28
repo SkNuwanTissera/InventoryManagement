@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('PharmacyApp').controller('UserController',['$scope','UserService',
+angular.module('InventoryApp').controller('UserController',['$scope','UserService',
     function ($scope,UserService) {
     /*
      * GETTERS
