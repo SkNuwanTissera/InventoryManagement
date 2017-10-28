@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('PharmacyApp').factory('UserService', ['$http',
+angular.module('InventoryApp').factory('UserService', ['$http',
     function ($http) {
 
     var currentUser ;

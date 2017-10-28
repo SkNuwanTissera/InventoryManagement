@@ -25,8 +25,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
     <script src="app.module.js"></script>
     <script src="controllers/invoice.controller.js"></script>
+    <script src="controllers/user.controller.js"></script>
     <script src="services/invoice.service.js"></script>
-   
+    <script src="services/user.service.js"></script>
+
 
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -233,8 +235,8 @@
                                                 <form method="get" class="form-horizontal">
                                                    <div class="row">
                                                        <div class="col-md-6">
-                                                           <div class="form-group"><label class="col-sm-4 control-label">VAT No.</label>
-                                                               <div class="col-sm-6"><input type="text" ng-model = "invoice.vatNo" class="form-control"></div>
+                                                           <div class="form-group"><label class="col-sm-4 control-label">PO No.</label>
+                                                               <div class="col-sm-6"><input type="text" ng-model = "invoice.pono" class="form-control"></div>
                                                            </div>
                                                        </div>
                                                        <div class="col-md-6">
@@ -246,133 +248,41 @@
                                                    </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <div class="form-group"><label class="col-sm-4 control-label">Customer</label>
-                                                            <div class="col-sm-6"><input type="text" ng-model = "invoice.cusName" class="form-control" name="username"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group"><label class="col-sm-4 control-label">Email</label>
-                                                            <div class="col-sm-6"><input type="text" ng-model = "user.email" class="form-control" name="email"></div>
-                                                        </div></div>
-
-
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group"><label class="col-sm-4 control-label">Password</label>
-                                                                <div class="col-sm-6"><input type="password" ng-model = "user.password" class="form-control" name="password"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group"><label class="col-sm-4 control-label">Confirm Password</label>
-                                                                <div class="col-sm-6"><input type="password" class="form-control" name="password"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group"><label class="col-sm-2 control-label">Mobile</label>
-                                                        <div class="col-sm-3"><input type="text" ng-model="user.mobile" placeholder="+94-775856964" class="form-control"> <span class="help-block m-b-none">Enter Mobile Number with Country Code.</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="hr-line-dashed"></div>
-                                                    <div class="form-group"><label class="col-sm-2 control-label">User Type <br/>
-                                                        <small class="text-navy">Pharmacist | Doctor | Patient</small></label>
-
-                                                        <div class="col-sm-10">
-                                                            <div><label style="color: #500a6f"> <input type="radio" checked="" ng-model = "user.userType" value="CPharmacist" id="CPharmacist" name="optionsRadios">  Chief Pharmacist </label></div>
-                                                            <div><label style="color: #8a1f11"> <input type="radio" ng-model = "user.userType" value="APharmacist" id="APharmacist" name="optionsRadios">  Assistant Pharmacist</label></div>
-                                                            <div><label style="color: #1AB394"> <input type="radio" ng-model = "user.userType" value="Doctor" id="Doctor" name="optionsRadios" onclick="window.invalidate_input()"> Doctor</label></div>
-                                                            <div><label style="color: #0d8ddb" > <input type="radio" ng-model = "user.userType" value="Patient" id="Patient" name="optionsRadios">  Patient</label></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!--Patient Section-->
-                                                    <div class="hr-line-dashed"></div>
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-6">
-                                                            <h3 style="align-self: center; opacity: 1; color: #0d8ddb">Patient Information</h3><br/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group"><label class="col-sm-4 control-label">Blood Group</label>
-
-                                                                <div class="col-sm-6"><select ng-model="user.bloodGroup" class="form-control m-b" id="Patient_BG" name="bloodGroup">
-                                                                    <option>Select</option>
-                                                                    <option ng-selected="user.bloodGroup=='B+'">B+</option>
-                                                                    <option ng-selected="user.bloodGroup=='B-'">B-</option>
-                                                                    <option ng-selected="user.bloodGroup=='A+'">A+</option>
-                                                                    <option ng-selected="user.bloodGroup=='A-'">A-</option>
-                                                                    <option ng-selected="user.bloodGroup=='AB+'">AB+</option>
-                                                                    <option ng-selected="user.bloodGroup=='AB-'">AB-</option>
-                                                                    <option ng-selected="user.bloodGroup=='O+'">O+</option>
-                                                                    <option ng-selected="user.bloodGroup=='O-'">O-</option>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">Customer</label>
+                                                            <div class="col-sm-6"ng-controller="UserController">
+                                                                <select ng-model="invoice.cusName" class="form-control" ng-options="user.Id as user.firstName for user in users">
+                                                                    <option value="">Select Option</option>
                                                                 </select>
 
-                                                                </div>
+                                                            </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-
-                                                        </div>
+                                                            <div class="form-group"><label class="col-sm-4 control-label">Notes</label>
+                                                            <div class="col-sm-6"><input type="text" ng-model = "invoice.notes" class="form-control" name="notes"></div>
+                                                        </div></div>
                                                     </div>
 
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="col-sm-4 control-label">Gender <br/>
-                                                                    <small class="text-navy">Male | Female </small></label>
+                                                    <div class="col-md-12" ng-controller="UserController">
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Details</label>
+                                                            <!--drug-->
+                                                            <div class="col-sm-3">
+                                                                <select name="drugName" ng-model="invoice.details.item">
+                                                                    <option ng-repeat="user in users" value="{{user.firstName}}">{{user.lastName}}</option>
+                                                                </select>
 
+                                                                <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-3"><input type="text" ng-model="invoice.details.qty" placeholder="Quantity" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-3"><input type="text" ng-model="invoice.details.price" placeholder="price" class="form-control"> <span class="help-block m-b-none"></span></div>
 
-                                                                <div><label> <input type="radio"  ng-model="user.gender" value="male" id="male" name="X" disabled>  Male </label></div>
-                                                                <div><label> <input type="radio" ng-model="user.gender" value="Female" id="female" name="X" disabled>  Female</label></div>
-
-                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group"><label class="col-sm-4 control-label">Age</label>
-                                                                    <div class="col-sm-6"><input type="text" id="age" ng-model = "user.age" class="form-control" disabled></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="form-group"><label class="col-sm-4 control-label">Height</label>
-                                                                    <div class="col-sm-6"><input type="text" id="height" ng-model = "user.height" class="form-control" disabled></div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-4">
-                                                                <div class="form-group"><label class="col-sm-4 control-label">Weight</label>
-                                                                    <div class="col-sm-6"><input type="text" id="weight" ng-model = "user.weight" class="form-control" disabled></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                    <div class="hr-line-dashed"></div>
-
-                                                    <div class="form-group"><label class="col-sm-2 control-label">Hospital</label>
-                                                        <div class="col-sm-5"><input id="txtBoxHospital" type="text" ng-model="user.hospital" placeholder=" E.g : National Hospital" class="form-control" disabled></div>
-                                                    </div>
-                                                    <div class="hr-line-dashed"></div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-4 col-sm-offset-2">
-                                                            <button class="btn btn-danger" type="submit">Cancel</button>
-                                                            <button class="btn btn-success"  ng-click="addInvoice(invoice)">Save changes</button>
-                                                        </div>
-                                                    </div>
-                                                <br/><br/>
+                                                    </div><br/><br/>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div class="row" >
                                     <table class="table">
