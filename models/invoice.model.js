@@ -6,7 +6,10 @@ const bcrypt   = require('bcrypt-nodejs');
 const Schema = mongoose.Schema;
 
 const InvoiceSchema = new Schema({
-
+    id:{
+        type:String,
+        required: true
+    },
     cusName: {
         type: String,
         required: true
@@ -18,9 +21,22 @@ const InvoiceSchema = new Schema({
     notes:{
         type: String,
         required:true
-    }
+    },
+    items:[{
+        name: {
+            type: String,
+            required: true
+        },
+        qty:{
+            type: Number,
+            required: true
+        },
+        price:{
+            type: Number,
+            required: true
+        }
+    }],
 
-    
 
 });
 
