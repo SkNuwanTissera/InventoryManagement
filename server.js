@@ -13,6 +13,8 @@ mongoose.Promise = global.Promise;
 //load models
 require('./models/user.model.js');
 require('./models/invoice.model.js');
+require('./models/vendor.model.js');
+require('./models/drug.model.js');
 
 
 //load passportJS configuration
@@ -22,6 +24,8 @@ require('./oauth/passport.js')(passport);
 const UserRouter = require('./routes/user.route.js');
 const MainRouter = require('./routes/main.route.js');
 const InvoiceRouter = require('./routes/invoice.route.js');
+const RawMaterialStockRouter = require('./routes/vendor.route.js');
+const DrugRouter = require('./routes/drug.route.js');
 
 
 // Init App
@@ -54,7 +58,7 @@ app.set('views', __dirname + '/public'); // set up ejs to be looked up in public
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 //connect to db
-mongoose.connect('mongodb://localhost:27017/pharmacy', err => {
+mongoose.connect('mongodb://localhost:27017/inventory', err => {
     if (err) {
         console.log(err);
         process.exit(1);
@@ -74,6 +78,8 @@ app.use('/app/modules', express.static(__dirname + '/bower_components'));
 app.use('/app', MainRouter);
 app.use('/users', UserRouter);
 app.use('/invoices', InvoiceRouter);
+app.use('/vendors',RawMaterialStockRouter);
+app.use('/drugs',DrugRouter);
 
 
 
@@ -87,6 +93,10 @@ app.get('/app/users', (req, res, next) => {
 
 app.get('/app/invoices', (req, res, next) => {
     res.sendFile(__dirname + '/public/invoice.html');
+});
+
+app.get('/app/materials', (req, res, next) => {
+    res.sendFile(__dirname + '/public/vendor.html');
 });
 
 
