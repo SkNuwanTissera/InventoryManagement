@@ -13,8 +13,10 @@ mongoose.Promise = global.Promise;
 //load models
 require('./models/user.model.js');
 require('./models/invoice.model.js');
+//Tharindu
+require('./models/materialstock.model.js');
 require('./models/vendor.model.js');
-require('./models/drug.model.js');
+require('./models/order.model.js');
 
 
 //load passportJS configuration
@@ -24,8 +26,11 @@ require('./oauth/passport.js')(passport);
 const UserRouter = require('./routes/user.route.js');
 const MainRouter = require('./routes/main.route.js');
 const InvoiceRouter = require('./routes/invoice.route.js');
-const RawMaterialStockRouter = require('./routes/vendor.route.js');
-const DrugRouter = require('./routes/drug.route.js');
+//Tharindu
+const MaterialStockRouter = require('./routes/materialstock.route.js');
+const VendorRouter = require('./routes/vendor.route.js');
+const OrderMailRouter = require('./routes/order.mail.route.js');
+const OrderRouter = require('./routes/order.route.js');
 
 
 // Init App
@@ -78,8 +83,11 @@ app.use('/app/modules', express.static(__dirname + '/bower_components'));
 app.use('/app', MainRouter);
 app.use('/users', UserRouter);
 app.use('/invoices', InvoiceRouter);
-app.use('/vendors',RawMaterialStockRouter);
-app.use('/drugs',DrugRouter);
+//Tharindu
+app.use('/materials',MaterialStockRouter);
+app.use('/vendors',VendorRouter);
+app.use('/ordermails',OrderMailRouter);
+app.use('/orders',OrderRouter);
 
 
 
@@ -96,7 +104,15 @@ app.get('/app/invoices', (req, res, next) => {
 });
 
 app.get('/app/materials', (req, res, next) => {
-    res.sendFile(__dirname + '/public/vendor.html');
+    res.sendFile(__dirname + '/public/materialstock.html');
+});
+
+app.get('/app/orders', (req, res, next) => {
+    res.sendFile(__dirname + '/public/stock.order.html');
+});
+
+app.get('/app/placeorder', (req, res, next) => {
+    res.sendFile(__dirname + '/public/stock.sendmail.html');
 });
 
 

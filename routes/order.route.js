@@ -5,8 +5,7 @@ const express = require('express'),
 
 mongoose.set('debug', false);
 
-const OrderModel = mongoose.model('Order'),
-    DrugModel = mongoose.model('Drug');
+const OrderModel = mongoose.model('Order');
 
 const Router = express.Router();
 

@@ -1,34 +1,37 @@
 'use strict';
 
-angular.module('PharmacyApp').controller('OrderMailController', ['$scope', 'VendorService',
-    function ($scope, VendorService) {
+angular.module('InventoryApp').controller('OrderMailController', ['$scope', 'MaterialService',
+    function ($scope, MaterialService) {
 
-        $scope.selectedDrug;
+        $scope.selectedMaterial;
         $scope.selectedVendor;
         $scope.selectedVendorEmail;
         $scope.quantity=1;
         $scope.description;
         $scope.date = new Date();
 
-        $scope.getVendorsBySellingDrug = function() {
-            VendorService.getVendorsByDrugs($scope.selectedDrug.drugName).then(vendor => {
-                $scope.vendorByDrug = vendor;
+        $scope.getVendorsBySellingMaterial = function() {
+            MaterialService.getById($scope.selectedMaterial._id).then(material => {
+                $scope.materialSellingVendors = material.company;
                 $scope.selectedVendorEmail="";
             });
         };
 
         $scope.getVendorEmail = function () {
-            $scope.selectedVendorEmail=$scope.selectedVendor.email;
-        };
-
-        //Get Drugs from DB
-        function getDrugs() {
-            VendorService.getDrugs().then(drugs => {
-                $scope.drugs = drugs;
+            MaterialService.getVendorEmail($scope.selectedVendor).then(vendor => {
+                $scope.selectedVendorEmail = vendor[0].email;
             });
         };
 
-        getDrugs();
+        //Get All Materials
+        function getMaterials() {
+            MaterialService.get().then(materials => {
+                $scope.materials = materials;
+            });
+        };
+
+        //Invoking Get All Materials function to load the table
+        getMaterials();
 
         //Form Validation Function
         function validateForm (){
@@ -36,7 +39,7 @@ angular.module('PharmacyApp').controller('OrderMailController', ['$scope', 'Vend
             if(document.getElementById("input1").selectedIndex <1){
                 valid=false;
                 swal({
-                    title: "Please Select a Drug!",
+                    title: "Please Select a Material!",
                     text: "",
                     type: "warning",
                     showCancelButton: false,
@@ -49,7 +52,7 @@ angular.module('PharmacyApp').controller('OrderMailController', ['$scope', 'Vend
             if(document.getElementById("input2").selectedIndex <1){
                 valid=false;
                 swal({
-                    title: "Please Select a Vendor!",
+                    title: "Please Select a Supplier!",
                     text: "",
                     type: "warning",
                     showCancelButton: false,
@@ -90,11 +93,11 @@ angular.module('PharmacyApp').controller('OrderMailController', ['$scope', 'Vend
                     function(){
 
                         var date = document.getElementById('input6').value;
-                        var order={"drug":$scope.selectedDrug.drugName,"vendor":$scope.selectedVendor.firstName,"vendorEmail":$scope.selectedVendorEmail,"qty":$scope.quantity,"note":$scope.description,"orderDate":date,"status":"Pending","receivedDate":"-"};
-                        VendorService.addOrder(order);
+                        var order={"material":$scope.selectedMaterial.materialName,"vendor":$scope.selectedVendor,"vendorEmail":$scope.selectedVendorEmail,"qty":$scope.quantity,"note":$scope.description,"orderDate":date,"status":"Pending","receivedDate":"-"};
+                        MaterialService.addOrder(order);
 
-                        var email={"drug":$scope.selectedDrug.drugName,"vendor":$scope.selectedVendor.firstName,"qty":$scope.quantity,"note":$scope.description,"date":date,"email":$scope.selectedVendorEmail};
-                        VendorService.sendMail(email);
+                        var email={"material":$scope.selectedMaterial.materialName,"vendor":$scope.selectedVendor,"qty":$scope.quantity,"note":$scope.description,"date":date,"email":$scope.selectedVendorEmail};
+                        MaterialService.sendMail(email);
 
                         setTimeout(function(){
                             swal("Order Was Placed!",);

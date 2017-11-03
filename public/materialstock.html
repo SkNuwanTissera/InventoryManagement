@@ -32,8 +32,8 @@
     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="./app.module.js"></script>
-    <script src="controllers/rawMaterial.controller.js"></script>
-    <script src="services/rawMaterial.service.js"></script>
+    <script src="controllers/materialstock.controller.js"></script>
+    <script src="services/materialstock.service.js"></script>
     <script src="../routes/main.route.js"></script>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +66,7 @@
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Tharindu Perera</strong>
-                             </span> <span class="text-muted text-xs block">Pharmacist <b class="caret"></b></span> </span> </a>
+                             </span> <span class="text-muted text-xs block">Stock Manager <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
@@ -171,7 +171,7 @@
 
 
                     <div  class="col-md-12">
-                        <h2 class="header">Material Management</h2>
+                        <h2 class="header">Material Stock Management</h2>
                         <div>
                             <div class="row">
                                 <div class="col-md-1 col-md-offset-11">
@@ -188,7 +188,7 @@
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h5>Create a New Material<small> .  Fill The Form Below</small></h5>
+                                        <h5>Create a New Material Stock<small> .  Fill The Form Below</small></h5>
                                         <div class="ibox-tools">
                                             <a class="collapse-link">
                                                 <i class="fa fa-chevron-up"></i>
@@ -205,44 +205,43 @@
                                     </div>
                                     <div class="ibox-content">
                                         <form method="get" class="form-horizontal">
-                                            <div class="form-group"><label class="col-sm-2 control-label">First Name</label>
-                                                <div class="col-sm-10"><input id="input1" type="text" ng-model = "material.firstName" class="form-control"></div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Material Name</label>
+                                                <div class="col-sm-10"><input id="input1" type="text" ng-model = "material.materialName" class="form-control"></div>
                                             </div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Last Name</label>
-                                                <div class="col-sm-10"><input id="input2" type="text" ng-model="material.lastName" class="form-control"></div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Address</label>
-                                                <div class="col-sm-10"><input id="input4" type="text" ng-model="material.address" class="form-control"></div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Mobile</label>
-                                                <div class="col-sm-3"><input id="input3" type="text" placeholder="0775856964" ng-model="material.tp" class="form-control"> <span class="help-block m-b-none">Enter Mobile Number in the Given Format.</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">E-mail</label>
-                                                <div class="col-sm-10"><input id="input5" type="text" ng-model="material.email" class="form-control"></div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Company</label>
-                                                <div class="col-sm-10"><input id="input6" type="text" ng-model="material.company" class="form-control"></div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-
-
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Selling Drugs</label>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Material Type</label>
                                                 <div class="col-sm-10">
-                                                    <select id="drugChosen" chosen multiple data-placeholder="Choose Drugs"
-                                                            ng-model="selectedDrugs"
-                                                            ng-options="drug.drugName for drug in drugs">
+                                                    <select ng-model="material.materialType" class="form-control m-b" id="input2">
+                                                        <option>Metal</option>
+                                                        <option>Plastic</option>
+                                                        <option>Wood</option>
+                                                        <option>Other</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div id="previouslyAddedDrugs" class="form-group"><label class="col-sm-2 control-label"></label>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Quantity</label>
+                                                <div class="col-sm-3"><input id="input4" type="number" min="1" ng-model="material.qty" class="form-control"></div> </label><span class="help-block m-b-none">(square ft.)</span>
+                                            </div>
+                                            <div class="form-group"><label class="col-sm-2 control-label" id="stockedDateLabel">Adding Date</label>
+                                                <div class="col-sm-3"><input id="input3" type="date" class="form-control" ng-value="material.stockedDate">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Suppliers</label>
+                                                <div class="col-sm-10">
+                                                    <select id="SupplierChosen" chosen multiple data-placeholder="Supplier"
+                                                            ng-model="selectedVendors"
+                                                            ng-options="vendor.companyName for vendor in vendors">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="previouslyAddedSuppliers" class="form-group"><label class="col-sm-2 control-label"></label>
                                                 <div class="col-sm-10">
                                                     <label class="col-sm-3 control-label">Previously Added Selling Drugs</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" disabled ng-repeat="drug in material.sellingDrugs" value={{drug}} class="form-control">
+                                                        <input type="text" disabled ng-repeat="company in material.company" value={{company}} class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -275,23 +274,19 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Address</th>
-                                    <th>Telephone</th>
-                                    <th>Company</th>
-                                    <th>Email</th>
+                                    <th>Material name</th>
+                                    <th>Material type</th>
+                                    <th>Quantity</th>
+                                    <th>Stocked Date</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="material in materials">
                                     <td>V 00{{material._id+1}}</td>
-                                    <td>{{material.firstName}}</td>
-                                    <td>{{material.lastName}}</td>
-                                    <td>{{material.address}}</td>
-                                    <td>{{material.tp}}</td>
-                                    <td>{{material.company}}</td>
-                                    <td>{{material.email}}</td>
+                                    <td>{{material.materialName}}</td>
+                                    <td>{{material.materialType}}</td>
+                                    <td>{{material.qty}}</td>
+                                    <td>{{material.stockedDate}}</td>
                                     <td><button data-toggle="modal" class="btn btn-primary" href="#modal-form" ng-click="getMaterialByID(material._id)">View</button></td>
                                     <td><button class="btn btn-warning" ng-click="getMaterialByID(material._id)" data-toggle="collapse" data-target="#materialForm"
                                                 aria-controls="materialForm" onclick="editBtnFunc()">Edit</button></td>
@@ -310,37 +305,31 @@
                                             <div class="row">
                                                 <div class="ibox-content">
                                                     <form method="get" class="form-horizontal">
-                                                        <div class="form-group"><label class="col-sm-2 control-label">First Name</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model = "material.firstName" class="form-control"></div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Material Name</label>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model = "material.materialName" class="form-control"></div>
                                                         </div>
-                                                        <div class="form-group"><label class="col-sm-2 control-label">Last Name</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.lastName" class="form-control"></div>
-                                                        </div>
-                                                        <div class="hr-line-dashed"></div>
-                                                        <div class="form-group"><label class="col-sm-2 control-label">Address</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.address" class="form-control"></div>
-                                                        </div>
-                                                        <div class="form-group"><label class="col-sm-2 control-label">Mobile</label>
-                                                            <div class="col-sm-8"><input type="text" disabled placeholder="0775856964" ng-model="material.tp" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group"><label class="col-sm-2 control-label">E-mail</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.email" class="form-control"></div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Material Type</label>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.materialType" class="form-control"></div>
                                                         </div>
                                                         <div class="hr-line-dashed"></div>
-                                                        <div class="form-group"><label class="col-sm-2 control-label">Company</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.company" class="form-control"></div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Quantity</label>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.qty" class="form-control"></div>
                                                         </div>
-                                                        <div class="hr-line-dashed"></div>
-
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Stocked Date</label>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.stockedDate" class="form-control" ></div>
+                                                        </div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Remaining Quantity</label>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.qty" class="form-control"></div>
+                                                        </div>
 
                                                         <div class="hr-line-dashed"></div>
-                                                        <div class="form-group"><label class="col-sm-2 control-label">Selling Drugs</label>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Suppliers</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" disabled ng-repeat="drug in material.sellingDrugs" value={{drug}} class="form-control">
+                                                                <input type="text" disabled ng-repeat="company in material.company" value={{company}} class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="hr-line-dashed"></div>
+                                                        
                                                     </form>
                                                 </div>
                                             </div>
@@ -400,28 +389,19 @@
         input2.value = "";
         input3.value = "";
         input4.value = "";
-        input5.value = "";
-        input6.value = "";
-        input7.value = "";
-    }
-    function hideAddBtn(){
-        document.getElementById(addBtn).style.hide();
-        document.getElementById(updateBtn).style.show();
-    }
-    function successAlert(){
-        swal("Good job!", "You clicked the button!", "success");
-        clearFiels();
     }
     function addBtnFunc() {
         document.getElementById('addBtn').style.display='inline';
         document.getElementById('updateBtn').style.display='none';
-        document.getElementById('previouslyAddedDrugs').style.display='none';
+        document.getElementById('previouslyAddedSuppliers').style.display='none';
+        document.getElementById('stockedDateLabel').textContent='Adding Date';
         clearFiels();
     }
     function editBtnFunc() {
         document.getElementById('updateBtn').style.display='inline';
         document.getElementById('addBtn').style.display='none';
-        document.getElementById('previouslyAddedDrugs').style.display='inline';
+        document.getElementById('previouslyAddedSuppliers').style.display='inline';
+        document.getElementById('stockedDateLabel').textContent='Stocked Date';
     }
 
 </script>

@@ -3,14 +3,14 @@
 const mongoose = require('mongoose'),
     autoIncrement = require('mongoose-auto-increment');
 
-var connection = mongoose.createConnection('mongodb://localhost:27017/pharmacy');
+var connection = mongoose.createConnection('mongodb://localhost:27017/inventory');
 
 autoIncrement.initialize(connection);
 
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-    drug: {
+    material: {
         type: String,
         required: true
     },

@@ -1,26 +1,16 @@
 'use strict';
 
-const mongoose = require('mongoose'),
-    autoIncrement = require('mongoose-auto-increment');
+const mongoose = require('mongoose');
 
-var connection = mongoose.createConnection('mongodb://localhost:27017/pharmacy');
-
-autoIncrement.initialize(connection);
+var connection = mongoose.createConnection('mongodb://localhost:27017/inventory');
 
 const Schema = mongoose.Schema;
 
 const VendorSchema = new Schema({
-    firstName: {
+    companyName: {
         type: String,
         required: true
     },
-    lastName: {
-        type: String,
-        required: true
-    },
-    sellingDrugs: [{
-        type: String
-    }],
     address: {
         type: String,
     },
@@ -29,17 +19,9 @@ const VendorSchema = new Schema({
     },
     email: {
         type: String
-    },
-    company: {
-        type: String
-    },
-    drugs: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Drug'
-    }]
+    }
 });
 
-VendorSchema.plugin(autoIncrement.plugin, 'Vendor');
 var Vendor = connection.model('Vendor', VendorSchema);
 //const Vendor = mongoose.model('Vendor', VendorSchema);
 

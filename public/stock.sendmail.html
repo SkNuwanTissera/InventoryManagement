@@ -26,14 +26,14 @@
 
 
     <!-- Angular js -->
-    <script src="modules/angular/angular.js"></script>
-    <script src="modules/angular-route/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
     <script src="js/angular-chosen.js"></script>
+    <script src="js/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="./app.module.js"></script>
     <script src="./controllers/order.mail.controller.js"></script>
-    <script src="./services/vendor.service.js"></script>
+    <script src="./services/materialstock.service.js"></script>
     <script src="../routes/main.route.js"></script>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 
 </head>
 
-<body ng-app="PharmacyApp" >
+<body ng-app="InventoryApp" >
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -85,7 +85,7 @@
                 <li class="active">
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Vendor</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li class="active"><a href="#" onclick="window.location.href = './vendors'">Manage Vendors</a></li>
+                        <li class="active"><a href="#" onclick="window.location.href = './materials'">Manage Vendors</a></li>
                         <li class="active"><a href="#" onclick="window.location.href = './placeorder'">Place Orders</a></li>
                         <li class="active"><a href="#" onclick="window.location.href = './orders'">Order History</a></li>
                     </ul>
@@ -193,14 +193,14 @@
                                     </div>
                                     <div class="ibox-content">
                                         <form method="get" class="form-horizontal">
-                                            <div class="form-group"><label class="col-sm-2 control-label">Drug</label>
-                                                <div class="col-sm-10"><select id="input1" type="text" ng-model = "selectedDrug" class="form-control" ng-change="getVendorsBySellingDrug()" ng-options="drug.drugName for drug in drugs">
-                                                    <option value="" selected="selected" disabled>Choose a Drug</option>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Material</label>
+                                                <div class="col-sm-10"><select id="input1" type="text" ng-model = "selectedMaterial" class="form-control" ng-change="getVendorsBySellingMaterial()" ng-options="material.materialName for material in materials">
+                                                    <option value="" selected="selected" disabled>Choose a Material</option>
                                                 </select></div>
                                             </div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Vendor</label>
-                                                <div class="col-sm-10"><select id="input2" type="text" ng-model = "selectedVendor" class="form-control" ng-change="getVendorEmail()" ng-options="vendor.firstName for vendor in vendorByDrug">
-                                                    <option value="" selected="selected" disabled>Choose a Vendor</option>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Supplier</label>
+                                                <div class="col-sm-10"><select id="input2" type="text" ng-model = "selectedVendor" class="form-control" ng-change="getVendorEmail()" ng-options="company for company in materialSellingVendors">
+                                                    <option value="" selected="selected" disabled>Choose a Supplier</option>
                                                 </select></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>

@@ -33,7 +33,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="./app.module.js"></script>
     <script src="./controllers/order.controller.js"></script>
-    <script src="./services/vendor.service.js"></script>
+    <script src="./services/materialstock.service.js"></script>
     <script src="../routes/main.route.js"></script>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 
 </head>
 
-<body  ng-app="PharmacyApp" >
+<body  ng-app="InventoryApp" >
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -85,7 +85,7 @@
                 <li class="active">
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Vendor</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li class="active"><a href="#" onclick="window.location.href = './vendors'">Manage Vendors</a></li>
+                        <li class="active"><a href="#" onclick="window.location.href = './materials'">Manage Vendors</a></li>
                         <li class="active"><a href="#" onclick="window.location.href = './placeorder'">Place Orders</a></li>
                         <li class="active"><a href="#" onclick="window.location.href = './orders'">Order History</a></li>
                     </ul>
@@ -178,7 +178,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Drug Name</th>
+                                    <th>Material Name</th>
                                     <th>Vendor Name</th>
                                     <th>Vendor Email</th>
                                     <th>Quantity</th>
@@ -191,7 +191,7 @@
                                 <tbody>
                                 <tr ng-repeat="order in orders">
                                     <td>V 00{{order._id+1}}</td>
-                                    <td>{{order.drug}}</td>
+                                    <td>{{order.material}}</td>
                                     <td>{{order.vendor}}</td>
                                     <td>{{order.vendorEmail}}</td>
                                     <td>{{order.qty}}</td>
@@ -216,13 +216,13 @@
                                                     <form method="get" class="form-horizontal">
                                                         <div class="hr-line-dashed"></div>
                                                         <div class="form-group"><label class="col-sm-4 control-label">Status</label>
-                                                            <div class="col-sm-5"><input type="text" ng-model = "order.status" class="form-control"></div>
+                                                            <div class="col-sm-5"><input type="text" value="Received" disabled class="form-control"></div>
                                                         </div>
                                                         <div class="form-group"><label class="col-sm-4 control-label">Received Date</label>
-                                                            <div class="col-sm-5"><input type="date" ng-model="order.receivedDate" class="form-control"></div>
+                                                            <div class="col-sm-5"><input type="date" id="receivedDate" ng-value="order.receivedDate" class="form-control"></div>
                                                         </div>
                                                         <div class="hr-line-dashed"></div>
-                                                        <div class="form-group"><label class="col-sm-9 control-label"><button class="btn btn-warning" ng-click="">Confirm</button></label>
+                                                        <div class="form-group"><label class="col-sm-9 control-label"><button class="btn btn-warning" ng-click="updateOrderStatus(order._id, order)">Confirm</button></label>
                                                             <div class="col-sm-4"></div>
                                                         </div>
                                                     </form>

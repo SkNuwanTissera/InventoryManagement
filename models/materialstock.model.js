@@ -10,32 +10,25 @@ autoIncrement.initialize(connection);
 const Schema = mongoose.Schema;
 
 const MaterialSchema = new Schema({
-    firstName: {
+    materialName: {
         type: String,
         required: true
     },
-    lastName: {
-        type: String,
-        required: true
-    },
-    sellingDrugs: [{
-        type: String
-    }],
-    address: {
-        type: String,
-    },
-    tp: {
+    materialType: {
         type: String
     },
-    email: {
+    qty: {
+        type: Number
+    },
+    stockedDate: {
         type: String
     },
-    company: {
-        type: String
-    },
-    drugs: [{
+    companyFull: [{
         type: Schema.Types.ObjectId,
-        ref: 'Drug'
+        ref: 'Vendor'
+    }],
+    company: [{
+        type: String
     }]
 });
 

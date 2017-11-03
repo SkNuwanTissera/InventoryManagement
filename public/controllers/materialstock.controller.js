@@ -3,21 +3,19 @@
 angular.module('InventoryApp').controller('MaterialController', ['$scope', 'MaterialService',
     function ($scope, MaterialService) {
 
-        $scope.selectedDrugs;
-        $scope.selectedDrugName;
+        $scope.selectedVendors = "" ;
+        $scope.selectedVendorName = "" ;
 
         //Form Validation Function
         function validateForm () {
             var valid=true;
-            var fName = document.getElementById('input1').value;
-            var lName = document.getElementById('input2').value;
-            var mobile = document.getElementById('input3').value;
-            var address = document.getElementById('input4').value;
-            var email = document.getElementById('input5').value;
-            var company = document.getElementById('input6').value;
+            var materialName = document.getElementById('input1').value;
+            var materialType = document.getElementById('input2').value;
+            var stockedDate = document.getElementById('input3').value;
+            var quantity = document.getElementById('input4').value;
 
             //Check Empty Fields
-            if(fName==""||lName==""||mobile==""||address==""||email==""||company==""){
+            if(materialName==""||materialType==""||stockedDate==""||quantity==""){
                 valid=false;
                 swal({
                         title: "Some Required Fields Are Empty!",
@@ -31,41 +29,12 @@ angular.module('InventoryApp').controller('MaterialController', ['$scope', 'Mate
                 return valid;
             }
 
-            //Validate Mobile No
-            if (/^\d{10}$/.test(mobile)==false) {
-                valid=false;
-                swal({
-                    title: "Invalid Mobile No!",
-                    text: "No should be like 0770011000",
-                    type: "warning",
-                    showCancelButton: false,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Retry!",
-                    closeOnConfirm: true
-                });
-                return valid;
-            }
-
-            //Validate Email Address
-            var tempEmail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-            if (tempEmail.test(email) == false)
-            {
-                valid=false;
-                swal({
-                    title: "Invalid Email Address!",
-                    text: "",
-                    type: "warning",
-                    showCancelButton: false,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Retry!",
-                    closeOnConfirm: true
-                });
-                return valid;
-            }
+            $scope.material.stockedDate = stockedDate;
 
             return valid;
 
         }
+
         //Get All Materials
         function getMaterials() {
             MaterialService.get().then(materials => {
@@ -76,14 +45,14 @@ angular.module('InventoryApp').controller('MaterialController', ['$scope', 'Mate
         //Invoking Get All Materials function to load the table
         getMaterials();
 
-        //Get Drugs from DB
-        function getDrugs() {
-            MaterialService.getDrugs().then(drugs => {
-                $scope.drugs = drugs;
+        //Get Vendors from DB
+        function getVendors() {
+            MaterialService.getVendors().then(vendors => {
+                $scope.vendors = vendors;
             });
         };
 
-        getDrugs();
+        getVendors();
 
         //Add new Material
         $scope.addMaterial = function(material) {
@@ -101,11 +70,10 @@ angular.module('InventoryApp').controller('MaterialController', ['$scope', 'Mate
                     function(){
                         var index;
                         var dNames = [];
-                        // for (index = 0; index < $scope.selectedDrugs.length; index++) {
-                        //     dNames.push($scope.selectedDrugs[index].drugName);
-                        // }
-                        material.sellingDrugs = dNames;
-                        // material.drugs = $scope.selectedDrugs;
+                        for (index = 0; index < $scope.selectedVendors.length; index++) {
+                            dNames.push($scope.selectedVendors[index].companyName);
+                        }
+                        $scope.material.company = dNames;
 
                         MaterialService.add(material).then(() => {
                             //Update the table after adding new material
@@ -160,11 +128,11 @@ angular.module('InventoryApp').controller('MaterialController', ['$scope', 'Mate
                     function(){
                         var index;
                         var dNames = [];
-                        for (index = 0; index < $scope.selectedDrugs.length; index++) {
-                            dNames.push($scope.selectedDrugs[index].drugName);
+                        for (index = 0; index < $scope.selectedVendors.length; index++) {
+                            dNames.push($scope.selectedVendors[index].companyName);
                         }
-                        material.sellingDrugs = dNames;
-                        // material.drugs = $scope.selectedDrugs;
+                        $scope.material.company = dNames;
+
                         MaterialService.put(material,id).then(() => {
                             getMaterials();
                         });
@@ -188,7 +156,7 @@ angular.module('InventoryApp').controller('MaterialController', ['$scope', 'Mate
         //Reset Material id before adding a new material
         $scope.resetMaterial = function () {
             $scope.material=null;
-            $scope.material.firstName="";
+            $scope.material.materialName="";
         }
 
     }]);

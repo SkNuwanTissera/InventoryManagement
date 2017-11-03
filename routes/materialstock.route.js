@@ -6,12 +6,12 @@ const express = require('express'),
 mongoose.set('debug', false);
 
 const MaterialModel = mongoose.model('Material'),
-    DrugModel = mongoose.model('Drug');
+    VendorModel = mongoose.model('Vendor');
 
 const Router = express.Router();
 
 Router.get('/', (req, res) => {
-    MaterialModel.find().populate('drugs').exec().then(materials => {
+    MaterialModel.find().populate('vendors').exec().then(materials => {
         res.json(materials);
     }).catch(err => {
         console.error(err);
@@ -19,9 +19,9 @@ Router.get('/', (req, res) => {
     });
 });
 
-Router.get('/drugs/:id', (req, res) => {
-    MaterialModel.find({ sellingDrugs: { "$in" : [req.params.id]} }).then(materials => {
-        res.json(materials);
+Router.get('/vendors/:id', (req, res) => {
+    VendorModel.find({ companyName: { "$in" : [req.params.id]} }).then(vendor => {
+        res.json(vendor);
     }).catch(err => {
         console.error(err);
         res.sendStatus(500);
@@ -61,8 +61,8 @@ Router.put('/:id', (req, res) => {
 
 Router.delete('/:id', (req, res) => {
     MaterialModel.findByIdAndRemove(req.params.id).then((material) => {
-        const drugIds = material.drugs.map((drugId => drugId));
-        return DrugModel.remove({_id: {$in: drugIds}});
+        const vendorIds = material.vendors.map((vendorId => vendorId));
+        return VendorModel.remove({_id: {$in: vendorIds}});
     }).then(() => {
         res.sendStatus(200);
     }).catch(err => {
@@ -71,14 +71,14 @@ Router.delete('/:id', (req, res) => {
     });
 });
 
-Router.post('/:id/drugs', (req, res) => {
-    let drug = new DrugModel(req.body);
+Router.post('/:id/vendors', (req, res) => {
+    let vendor = new VendorModel(req.body);
     const materialId = req.params.id;
-    drug.material = materialId;
-    drug.save().then(drugDb => {
-        return MaterialModel.findByIdAndUpdate(materialId, {$push: {"drugs": drugDb._id}})
+    vendor.material = materialId;
+    vendor.save().then(vendorDb => {
+        return MaterialModel.findByIdAndUpdate(materialId, {$push: {"vendors": vendorDb._id}})
     }).then(() => {
-        return MaterialModel.findById(materialId).populate('drugs').exec();
+        return MaterialModel.findById(materialId).populate('vendors').exec();
     }).then(materialDb => {
         res.json(materialDb);
     }).catch(err => {

@@ -27,12 +27,12 @@ Router.post('/', (req, res) => {
     const text = "<html> " +
         "<body> " +
         "<h1>Order From HexSpeak Pharmacy</h1>" +"<br>"+
-        "<h3>Drug : "+req.body.drug+"</h3>"+
+        "<h3>Material : "+req.body.material+"</h3>"+
         "<h3>Vendor : "+req.body.vendor+"</h3>"+
         "<h3>Quantity : "+req.body.qty+"</h3>"+
         "<h3>Order Date : "+req.body.note+"</h3>"+
         "<h3>Description : "+req.body.date+"</h3>"+"<br>"+
-        "<h5>HexSpeak Pharmacy Systems </h5> " +
+        "<h5>HexSpeak Factory Systems </h5> " +
         "<h5>Sri Lanka</h5>" +
         "</body> " +
         "</html>"; //req.body;
@@ -41,7 +41,7 @@ Router.post('/', (req, res) => {
     let mailOptions = {
         from: 'hexspeakpharmacy@gmail.com', // sender address
         to: req.body.email,// list of receivers
-        subject: 'Order From HexSpeak Pharmacy', // Subject line
+        subject: 'Order From HexSpeak Factory', // Subject line
         html: text //, // plaintext body
         // html: '<b>Hello world ?</b>' // You can choose to send an HTML body instead
     };
