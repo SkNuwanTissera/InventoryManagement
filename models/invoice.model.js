@@ -18,14 +18,14 @@ const InvoiceSchema = new Schema({
 
     },
     date: {
-        type: String,
+        type: Date,
 
     },
     notes:{
         type: String,
 
     },
-    items:[{
+    item1:{
         name: {
             type: String,
 
@@ -38,7 +38,7 @@ const InvoiceSchema = new Schema({
             type: Number,
 
         }
-    }],
+    },
 
 
 });

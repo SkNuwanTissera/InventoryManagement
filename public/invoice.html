@@ -257,8 +257,8 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-4 control-label">Customer</label>
                                                             <div class="col-sm-6"ng-controller="UserController">
-                                                                <select ng-model="invoice.cusName"  class="form-control" ng-options="user.Id as user.firstName for user in users">
-                                                                    <option ng-selected="">Select Option</option>
+                                                                <select ng-model="invoice.cusName"  class="form-control" >
+                                                                    <option ng-repeat="user in users" ng-selected='{{user.firstName}}' value="{{user.firstName}}">{{user.firstName}}</option>
                                                                 </select>
 
                                                             </div>
@@ -270,25 +270,87 @@
                                                         </div></div>
                                                     </div>
 
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12" >
+
                                                         <div class="form-group"><label class="col-sm-2 control-label">Item 1 </label>
                                                             <!--invoiceitem1-->
-                                                            <div class="col-sm-3" ng-controller="ItemController">
-                                                                <select name="drugName" ng-model="invoice.item.name">
-                                                                    <option ng-repeat="item in items" value="{{item.name}}">{{item.name}}</option>
+                                                            <div class="col-sm-3">
+                                                                <select name="drugName" ng-model="invoice.item1.name" ng-controller="ItemController">
+                                                                    <option ng-repeat="item in items" ng-selected='{{item.name}}' value="{{item.name}}">{{item.name}}</option>
                                                                 </select>
 
                                                                 <span class="help-block m-b-none"></span></div>
-                                                            <div class="col-sm-2"><input type="text" id="qty" ng-model="invoice.item.qty" placeholder="Quantity" class="form-control"> <span class="help-block m-b-none"></span></div>
-                                                            <div class="col-sm-2"><input type="text" id ="price"  ng-model="invoice.item.price" placeholder="Price" class="form-control"> <span class="help-block m-b-none"></span></div>
-                                                            <div class="col-sm-2"><input type="text"  id="total" placeholder="0" class="form-control"> <span class="help-block m-b-none" ></span></div>
-                                                            </div>
-                                                    </div><br/><br/>
-                                                    <div class="hr-line-dashed"></div>
+                                                            <div class="col-sm-2"><input type="text" id="qty1" ng-model="invoice.item1.qty" placeholder="Quantity" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id ="price1"  ng-model="invoice.item1.price" placeholder="Price" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text"  id="total1" placeholder="0" class="form-control"> <span class="help-block m-b-none" ></span></div>
+                                                        </div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Item 2 </label>
+                                                            <!--invoiceitem1-->
+                                                            <div class="col-sm-3">
+                                                                <select name="drugName" ng-model="invoice.item2.name" ng-controller="ItemController">
+                                                                    <option ng-repeat="item in items" ng-selected='{{item.name}}' value="{{item.name}}">{{item.name}}</option>
+                                                                </select>
+
+                                                                <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id="qty2" ng-model="invoice.item2.qty" placeholder="Quantity" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id ="price2"  ng-model="invoice.item2.price" placeholder="Price" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text"  id="total2" placeholder="0" class="form-control"> <span class="help-block m-b-none" ></span></div>
+                                                        </div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Item 3 </label>
+                                                            <!--invoiceitem1-->
+                                                            <div class="col-sm-3">
+                                                                <select name="drugName" ng-model="invoice.item3.name" ng-controller="ItemController">
+                                                                    <option ng-repeat="item in items" ng-selected='{{item.name}}' value="{{item.name}}">{{item.name}}</option>
+                                                                </select>
+
+                                                                <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id="qty3" ng-model="invoice.item3.qty" placeholder="Quantity" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id ="price3"  ng-model="invoice.item3.price" placeholder="Price" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text"  id="total3" placeholder="0" class="form-control"> <span class="help-block m-b-none" ></span></div>
+                                                        </div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label" >Item 4 </label>
+                                                            <!--invoiceitem1-->
+                                                            <div class="col-sm-3">
+                                                                <select name="drugName" ng-model="invoice.item4.name" ng-controller="ItemController">
+                                                                    <option ng-repeat="item in items" ng-selected='{{item.name}}' value="{{item.name}}">{{item.name}}</option>
+                                                                </select>
+
+                                                                <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id="qty4" ng-model="invoice.item4.qty" placeholder="Quantity" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id ="price4"  ng-model="invoice.item4.price" placeholder="Price" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text"  id="total4" placeholder="0" class="form-control"> <span class="help-block m-b-none" ></span></div>
+                                                        </div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Item 5 </label>
+                                                            <!--invoiceitem1-->
+                                                            <div class="col-sm-3">
+                                                                <select name="drugName" ng-model="invoice.item5.name" ng-controller="ItemController">
+                                                                    <option ng-repeat="item in items" ng-selected='{{item.name}}'  value="{{item.name}}">{{item.name}}</option>
+                                                                </select>
+
+                                                                <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id="qty5" ng-model="invoice.item5.qty" placeholder="Quantity" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text" id ="price5"  ng-model="invoice.item5.price" placeholder="Price" class="form-control"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text"  id="total5" placeholder="0" class="form-control"> <span class="help-block m-b-none" ></span></div>
+                                                        </div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Total </label>
+                                                            <!--invoiceitem1-->
+                                                            <div class="col-sm-3">
+
+                                                                </select>
+
+                                                                <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"> <span class="help-block m-b-none"></span></div>
+                                                            <div class="col-sm-2"><input type="text"  id="Finaltotal" placeholder="0" class="form-control"> <span class="help-block m-b-none" ></span></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <br/><br/>
+
                                                     <div class="form-group">
                                                         <div class="col-sm-4 col-sm-offset-2">
                                                             <button class="btn btn-danger" type="submit">Cancel</button>
-                                                            <button class="btn btn-success"  ng-click="addInvoice(invoice)">Save changes</button>
+                                                            <button class="btn btn-success"  ng-click="addInvoice(invoice)">Create Invoice</button>
                                                         </div>
                                                     </div>
                                                 </form>
