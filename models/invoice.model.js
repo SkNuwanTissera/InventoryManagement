@@ -8,32 +8,35 @@ const Schema = mongoose.Schema;
 const InvoiceSchema = new Schema({
     id:{
         type:String,
-        required: true
+
+    },
+    pono:{
+        type:String
     },
     cusName: {
-        type: String,
-        required: true
+        type: String
+
     },
     date: {
         type: String,
-        required: true
+
     },
     notes:{
         type: String,
-        required:true
+
     },
     items:[{
         name: {
             type: String,
-            required: true
+
         },
         qty:{
             type: Number,
-            required: true
+
         },
         price:{
             type: Number,
-            required: true
+
         }
     }],
 

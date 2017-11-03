@@ -23,6 +23,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js" integrity="sha256-lw0u1cTM3AYG0sY5cKefhETFxDjo/T5GTAppqOwgGPY=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+            crossorigin="anonymous"></script>
     <script src="app.module.js"></script>
     <script src="controllers/invoice.controller.js"></script>
     <script src="controllers/item.controller.js"></script>
@@ -253,8 +257,8 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-4 control-label">Customer</label>
                                                             <div class="col-sm-6"ng-controller="UserController">
-                                                                <select ng-model="invoice.cusName" class="form-control" ng-options="user.Id as user.firstName for user in users">
-                                                                    <option value="">Select Option</option>
+                                                                <select ng-model="invoice.cusName"  class="form-control" ng-options="user.Id as user.firstName for user in users">
+                                                                    <option ng-selected="">Select Option</option>
                                                                 </select>
 
                                                             </div>
@@ -300,6 +304,8 @@
                                             <th>Invoice#</th>
                                             <th>Customer</th>
                                             <th>Date</th>
+                                            <th>PO No.</th>
+                                            <th>Notes</th>
 
                                             <th></th>
                                             <th></th>
@@ -308,12 +314,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr ng-repeat="invoice in invoices | filter:query">
+                                        <tr ng-repeat="invoice in invoices">
                                             <td>{{invoice.id}}</td>
                                             <td>{{invoice.cusName}} </td>
                                             <td>{{invoice.date}}</td>
+                                            <td>{{invoice.pono}}</td>
+                                            <td>{{invoice.notes}}</td>
 
-                                            <!--<td><input ng-model="user.lastNames" placeholder="lastname"/></td>-->
                                             <td><button class="btn btn-success" ng-click="editInvoice(invoice,inovice._id)">Edit</button></td>
                                             <td><button class="btn btn-danger" ng-click="deleteInvoice(invoice._id)">Delete</button></td>
 
@@ -330,7 +337,7 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="js/jquery-2.1.1.js"></script>
+
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>

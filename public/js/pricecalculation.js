@@ -16,23 +16,17 @@ $(function() {
         var input1 = parseInt($('#qty').val());
         var input2 = parseInt($('#price').val());
         if (isNaN(input1) || isNaN(input2)) {
-            if(!input2){
+            if (!input2) {
                 $('#total').val($('#qty').val());
             }
 
-            if(!input1){
+            if (!input1) {
                 $('#total').val($('#price').val());
+
+            } else {
+                $('#total').val(input1 * input2);
             }
-
-        } else {
-            $('#total').val(input1 * input2);
         }
-    };
+        ;
 
-    var output_total = $('#total');
-
-    var total = input1 + input2;
-
-    output_total.val(total);
-
-});
+    }});

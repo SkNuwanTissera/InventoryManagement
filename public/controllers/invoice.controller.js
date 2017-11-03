@@ -21,11 +21,16 @@ angular.module('InventoryApp').controller('InvoiceController',['$scope','Invoice
      * */
 
     //1. set nvoices
+        $scope.itemList=[];
+
+        $scope.changedValue=function(item){
+
+            $scope.itemList.push(item.name);
+        }
 
         $scope.addInvoice = function(invoice) {
             alert('fdfdfdfdfdf');
             InvoiceService.add(invoice).then(() => {
-                alert('qqqq');
                 getinvoices();
                 invoice = {};
 
