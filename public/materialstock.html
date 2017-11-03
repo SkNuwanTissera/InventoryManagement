@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Vendors</title>
+    <title>Materials</title>
 
     <!-- include the jQuery n Chosen js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -32,8 +32,8 @@
     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="./app.module.js"></script>
-    <script src="./controllers/vendor.controller.js"></script>
-    <script src="./services/vendor.service.js"></script>
+    <script src="controllers/rawMaterial.controller.js"></script>
+    <script src="services/rawMaterial.service.js"></script>
     <script src="../routes/main.route.js"></script>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -83,9 +83,9 @@
 
 
                 <li class="active">
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Vendor</span> <span class="fa arrow"></span></a>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Material</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li class="active"><a href="#" onclick="window.location.href = './vendors'">Manage Vendors</a></li>
+                        <li class="active"><a href="#" onclick="window.location.href = './materials'">Manage Materials</a></li>
                         <li class="active"><a href="#" onclick="window.location.href = './placeorder'">Place Orders</a></li>
                         <li class="active"><a href="#" onclick="window.location.href = './orders'">Order History</a></li>
                     </ul>
@@ -167,16 +167,16 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div  class="wrapper wrapper-content" ng-controller="VendorController">
+                <div  class="wrapper wrapper-content" ng-controller="MaterialController">
 
 
                     <div  class="col-md-12">
-                        <h2 class="header">Vendor Management</h2>
+                        <h2 class="header">Material Management</h2>
                         <div>
                             <div class="row">
                                 <div class="col-md-1 col-md-offset-11">
-                                    <button class="btn btn-default pull-right" data-toggle="collapse" data-target="#vendorForm"
-                                            aria-controls="vendorForm" onclick="addBtnFunc()" ng-click="resetVendor()">Add Vendor
+                                    <button class="btn btn-default pull-right" data-toggle="collapse" data-target="#materialForm"
+                                            aria-controls="materialForm" onclick="addBtnFunc()" ng-click="resetMaterial()">Add Material
                                     </button>
                                 </div>
                             </div>
@@ -184,11 +184,11 @@
 
                         </div>
 
-                        <div class="row collapse" id="vendorForm" aria-expanded="false" >
+                        <div class="row collapse" id="materialForm" aria-expanded="false" >
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h5>Create a New Vendor<small> .  Fill The Form Below</small></h5>
+                                        <h5>Create a New Material<small> .  Fill The Form Below</small></h5>
                                         <div class="ibox-tools">
                                             <a class="collapse-link">
                                                 <i class="fa fa-chevron-up"></i>
@@ -196,7 +196,7 @@
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                                 <i class="fa fa-wrench"></i>
                                             </a>
-                                            <ul class="dropdown-menu dropdown-vendor">
+                                            <ul class="dropdown-menu dropdown-material">
                                             </ul>
                                             <a class="close-link">
                                                 <i class="fa fa-times"></i>
@@ -206,25 +206,25 @@
                                     <div class="ibox-content">
                                         <form method="get" class="form-horizontal">
                                             <div class="form-group"><label class="col-sm-2 control-label">First Name</label>
-                                                <div class="col-sm-10"><input id="input1" type="text" ng-model = "vendor.firstName" class="form-control"></div>
+                                                <div class="col-sm-10"><input id="input1" type="text" ng-model = "material.firstName" class="form-control"></div>
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Last Name</label>
-                                                <div class="col-sm-10"><input id="input2" type="text" ng-model="vendor.lastName" class="form-control"></div>
+                                                <div class="col-sm-10"><input id="input2" type="text" ng-model="material.lastName" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Address</label>
-                                                <div class="col-sm-10"><input id="input4" type="text" ng-model="vendor.address" class="form-control"></div>
+                                                <div class="col-sm-10"><input id="input4" type="text" ng-model="material.address" class="form-control"></div>
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Mobile</label>
-                                                <div class="col-sm-3"><input id="input3" type="text" placeholder="0775856964" ng-model="vendor.tp" class="form-control"> <span class="help-block m-b-none">Enter Mobile Number in the Given Format.</span>
+                                                <div class="col-sm-3"><input id="input3" type="text" placeholder="0775856964" ng-model="material.tp" class="form-control"> <span class="help-block m-b-none">Enter Mobile Number in the Given Format.</span>
                                                 </div>
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">E-mail</label>
-                                                <div class="col-sm-10"><input id="input5" type="text" ng-model="vendor.email" class="form-control"></div>
+                                                <div class="col-sm-10"><input id="input5" type="text" ng-model="material.email" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Company</label>
-                                                <div class="col-sm-10"><input id="input6" type="text" ng-model="vendor.company" class="form-control"></div>
+                                                <div class="col-sm-10"><input id="input6" type="text" ng-model="material.company" class="form-control"></div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
 
@@ -242,7 +242,7 @@
                                                 <div class="col-sm-10">
                                                     <label class="col-sm-3 control-label">Previously Added Selling Drugs</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" disabled ng-repeat="drug in vendor.sellingDrugs" value={{drug}} class="form-control">
+                                                        <input type="text" disabled ng-repeat="drug in material.sellingDrugs" value={{drug}} class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,10 +256,10 @@
 
                                             <div class="form-group">
                                                 <div class="col-sm-4 col-sm-offset-2">
-                                                    <button class="btn btn-danger" data-toggle="collapse" onclick="clearFiels()" data-target="#vendorForm"
-                                                            aria-controls="vendorForm" ng-click="resetVendor()">Cancel</button>
-                                                    <button class="btn btn-success" id="addBtn" ng-click="addVendor(vendor)" type="submit">Add</button>
-                                                    <button class="btn btn-success" id="updateBtn" ng-click="editVendor(vendor,vendor._id)" type="submit">Update</button>
+                                                    <button class="btn btn-danger" data-toggle="collapse" onclick="clearFiels()" data-target="#materialForm"
+                                                            aria-controls="materialForm" ng-click="resetMaterial()">Cancel</button>
+                                                    <button class="btn btn-success" id="addBtn" ng-click="addMaterial(material)" type="submit">Add</button>
+                                                    <button class="btn btn-success" id="updateBtn" ng-click="editMaterial(material,material._id)" type="submit">Update</button>
                                                 </div>
                                             </div>
                                             <br/><br/>
@@ -284,18 +284,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="vendor in vendors">
-                                    <td>V 00{{vendor._id+1}}</td>
-                                    <td>{{vendor.firstName}}</td>
-                                    <td>{{vendor.lastName}}</td>
-                                    <td>{{vendor.address}}</td>
-                                    <td>{{vendor.tp}}</td>
-                                    <td>{{vendor.company}}</td>
-                                    <td>{{vendor.email}}</td>
-                                    <td><button data-toggle="modal" class="btn btn-primary" href="#modal-form" ng-click="getVendorByID(vendor._id)">View</button></td>
-                                    <td><button class="btn btn-warning" ng-click="getVendorByID(vendor._id)" data-toggle="collapse" data-target="#vendorForm"
-                                                aria-controls="vendorForm" onclick="editBtnFunc()">Edit</button></td>
-                                    <td><button class="btn btn-danger" ng-click="deleteVendor(vendor._id)">Delete</button></td>
+                                <tr ng-repeat="material in materials">
+                                    <td>V 00{{material._id+1}}</td>
+                                    <td>{{material.firstName}}</td>
+                                    <td>{{material.lastName}}</td>
+                                    <td>{{material.address}}</td>
+                                    <td>{{material.tp}}</td>
+                                    <td>{{material.company}}</td>
+                                    <td>{{material.email}}</td>
+                                    <td><button data-toggle="modal" class="btn btn-primary" href="#modal-form" ng-click="getMaterialByID(material._id)">View</button></td>
+                                    <td><button class="btn btn-warning" ng-click="getMaterialByID(material._id)" data-toggle="collapse" data-target="#materialForm"
+                                                aria-controls="materialForm" onclick="editBtnFunc()">Edit</button></td>
+                                    <td><button class="btn btn-danger" ng-click="deleteMaterial(material._id)">Delete</button></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -311,25 +311,25 @@
                                                 <div class="ibox-content">
                                                     <form method="get" class="form-horizontal">
                                                         <div class="form-group"><label class="col-sm-2 control-label">First Name</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model = "vendor.firstName" class="form-control"></div>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model = "material.firstName" class="form-control"></div>
                                                         </div>
                                                         <div class="form-group"><label class="col-sm-2 control-label">Last Name</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model="vendor.lastName" class="form-control"></div>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.lastName" class="form-control"></div>
                                                         </div>
                                                         <div class="hr-line-dashed"></div>
                                                         <div class="form-group"><label class="col-sm-2 control-label">Address</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model="vendor.address" class="form-control"></div>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.address" class="form-control"></div>
                                                         </div>
                                                         <div class="form-group"><label class="col-sm-2 control-label">Mobile</label>
-                                                            <div class="col-sm-8"><input type="text" disabled placeholder="0775856964" ng-model="vendor.tp" class="form-control">
+                                                            <div class="col-sm-8"><input type="text" disabled placeholder="0775856964" ng-model="material.tp" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="form-group"><label class="col-sm-2 control-label">E-mail</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model="vendor.email" class="form-control"></div>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.email" class="form-control"></div>
                                                         </div>
                                                         <div class="hr-line-dashed"></div>
                                                         <div class="form-group"><label class="col-sm-2 control-label">Company</label>
-                                                            <div class="col-sm-8"><input type="text" disabled ng-model="vendor.company" class="form-control"></div>
+                                                            <div class="col-sm-8"><input type="text" disabled ng-model="material.company" class="form-control"></div>
                                                         </div>
                                                         <div class="hr-line-dashed"></div>
 
@@ -337,7 +337,7 @@
                                                         <div class="hr-line-dashed"></div>
                                                         <div class="form-group"><label class="col-sm-2 control-label">Selling Drugs</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" disabled ng-repeat="drug in vendor.sellingDrugs" value={{drug}} class="form-control">
+                                                                <input type="text" disabled ng-repeat="drug in material.sellingDrugs" value={{drug}} class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="hr-line-dashed"></div>

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('InventoryApp').controller('VendorController', ['$scope', 'VendorService',
-    function ($scope, VendorService) {
+angular.module('InventoryApp').controller('MaterialController', ['$scope', 'MaterialService',
+    function ($scope, MaterialService) {
 
         $scope.selectedDrugs;
         $scope.selectedDrugName;
@@ -66,30 +66,30 @@ angular.module('InventoryApp').controller('VendorController', ['$scope', 'Vendor
             return valid;
 
         }
-        //Get All Vendors
-        function getVendors() {
-            VendorService.get().then(vendors => {
-                $scope.vendors = vendors;
+        //Get All Materials
+        function getMaterials() {
+            MaterialService.get().then(materials => {
+                $scope.materials = materials;
             });
         };
 
-        //Invoking Get All Vendors function to load the table
-        getVendors();
+        //Invoking Get All Materials function to load the table
+        getMaterials();
 
         //Get Drugs from DB
         function getDrugs() {
-            VendorService.getDrugs().then(drugs => {
+            MaterialService.getDrugs().then(drugs => {
                 $scope.drugs = drugs;
             });
         };
 
         getDrugs();
 
-        //Add new Vendor
-        $scope.addVendor = function(vendor) {
+        //Add new Material
+        $scope.addMaterial = function(material) {
             if (validateForm()){
                 swal({
-                        title: "Do You Really Want To Add This Vendor?",
+                        title: "Do You Really Want To Add This Material?",
                         text: "",
                         type: "info",
                         showCancelButton: true,
@@ -101,32 +101,32 @@ angular.module('InventoryApp').controller('VendorController', ['$scope', 'Vendor
                     function(){
                         var index;
                         var dNames = [];
-                        for (index = 0; index < $scope.selectedDrugs.length; index++) {
-                            dNames.push($scope.selectedDrugs[index].drugName);
-                        }
-                        vendor.sellingDrugs = dNames;
-                        // vendor.drugs = $scope.selectedDrugs;
+                        // for (index = 0; index < $scope.selectedDrugs.length; index++) {
+                        //     dNames.push($scope.selectedDrugs[index].drugName);
+                        // }
+                        material.sellingDrugs = dNames;
+                        // material.drugs = $scope.selectedDrugs;
 
-                        VendorService.add(vendor).then(() => {
-                            //Update the table after adding new vendor
-                            getVendors();
-                            vendor = {};
+                        MaterialService.add(material).then(() => {
+                            //Update the table after adding new material
+                            getMaterials();
+                            material = {};
                         });
                         setTimeout(function(){
-                            swal("New Vendor Added Successfully!");
+                            swal("New Material Added Successfully!");
                             setTimeout(function(){
-                                window.location.href = './vendors';
+                                window.location.href = './materials';
                             },1800);
                         }, 1000);
                     });
             }
         };
 
-        //Delete a Vendor
-        $scope.deleteVendor = function(id) {
+        //Delete a Material
+        $scope.deleteMaterial = function(id) {
             swal({
                     title: "Are you sure?",
-                    text: "You will not be able to recover this vendor`s details!",
+                    text: "You will not be able to recover this material`s details!",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -134,18 +134,18 @@ angular.module('InventoryApp').controller('VendorController', ['$scope', 'Vendor
                     closeOnConfirm: false
                 },
                 function(){
-                    VendorService.delete(id).then(() => {
-                        getVendors();
+                    MaterialService.delete(id).then(() => {
+                        getMaterials();
                     });
-                    swal("Deleted!", "The vendor has been deleted.", "success");
+                    swal("Deleted!", "The material has been deleted.", "success");
                     setTimeout(function(){
-                        window.location.href = './vendors';
+                        window.location.href = './materials';
                     },1800);
                 });
         };
 
-        //Edit Vendor
-        $scope.editVendor = function(vendor,id) {
+        //Edit Material
+        $scope.editMaterial = function(material,id) {
             if (validateForm()){
                 swal({
                         title: "Do You Really Want To Save The Changes?",
@@ -163,32 +163,32 @@ angular.module('InventoryApp').controller('VendorController', ['$scope', 'Vendor
                         for (index = 0; index < $scope.selectedDrugs.length; index++) {
                             dNames.push($scope.selectedDrugs[index].drugName);
                         }
-                        vendor.sellingDrugs = dNames;
-                        // vendor.drugs = $scope.selectedDrugs;
-                        VendorService.put(vendor,id).then(() => {
-                            getVendors();
+                        material.sellingDrugs = dNames;
+                        // material.drugs = $scope.selectedDrugs;
+                        MaterialService.put(material,id).then(() => {
+                            getMaterials();
                         });
                         setTimeout(function(){
-                            swal("Vendor Details Saved!",);
+                            swal("Material Details Saved!",);
                             setTimeout(function(){
-                                window.location.href = './vendors';
+                                window.location.href = './materials';
                             },1800);
                         }, 1000);
                     });
             }
         };
 
-        //Get a particular Vendor
-        $scope.getVendorByID = function (id) {
-            VendorService.getById(id).then(vendor => {
-                $scope.vendor = vendor;
+        //Get a particular Material
+        $scope.getMaterialByID = function (id) {
+            MaterialService.getById(id).then(material => {
+                $scope.material = material;
             });
         }
 
-        //Reset Vendor id before adding a new vendor
-        $scope.resetVendor = function () {
-            $scope.vendor=null;
-            $scope.vendor.firstName="";
+        //Reset Material id before adding a new material
+        $scope.resetMaterial = function () {
+            $scope.material=null;
+            $scope.material.firstName="";
         }
 
     }]);
